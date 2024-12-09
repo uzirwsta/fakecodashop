@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer
       style={{
-        backgroundImage: 'linear-gradient(to right, #1e1e30, #6C63FF)', // Galaxy-themed gradient
+        backgroundImage: 'linear-gradient(to right, #1e1e30, #6C63FF)',
         color: '#ffffff',
         padding: '20px 0',
         textAlign: 'center',
