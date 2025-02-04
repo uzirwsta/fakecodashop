@@ -8,16 +8,15 @@ function App() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        // Fetch games data from the API
         axios.get('http://localhost:8000/api/games/')
             .then(response => {
                 console.log(response.data);
-                setGames(response.data); // Update state with the fetched data
+                setGames(response.data); 
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, []); // Empty dependency array means this runs once on component mount
+    }, []); 
 
     return (
         <>
