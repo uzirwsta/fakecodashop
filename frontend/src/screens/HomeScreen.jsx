@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import games from '../games';
+import axios from 'axios';
 import Game from '../components/Game';
-import axios from 'axios'
-import { useEffect } from 'react';
 
 function HomeScreen() {
-  const [games, setGames] = useState([])
+  const [games, setGames] = useState([]);
+  const [error, setError] = useState(null); 
+
   useEffect(() => {
-    async function fetchGames(){
-      const {data} = await axios.get('http://127.0.0.1:8000/games')
-      setGames(data)
+    async function fetchGames() {
+      try {
+        const { data } = await axios.get('http://localhost:8000/api/games/'); 
+        setGames(data);
+      } catch (error) {
+        console.error('Error fetching games:', error);
+        setError('Please try again later.'); 
+      }
     }
-    fetchGames()
-    })
+    fetchGames();
+  }, []); 
+
   return (
     <div
       style={{
@@ -50,11 +56,14 @@ function HomeScreen() {
           </h1>
         </div>
 
+        {/* Error Message */}
+        {error && <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>}
+
         {/* Row for Games */}
         <Row>
           {games.map(game => (
             <Col key={game._id} sm={12} md={6} lg={4} xl={3} style={{ paddingBottom: '20px' }}>
-                <Game game={game}/>
+              <Game game={game} />
               <div
                 style={{
                   backgroundColor: '#222',
@@ -100,7 +109,7 @@ function HomeScreen() {
                     right: '0',
                     background: 'rgba(0, 0, 0, 0.7)',
                     color: '#fff',
-                    padding: '10px',
+                    padding: ' 10px',
                     textAlign: 'center',
                     fontSize: '1.2rem',
                     fontFamily: 'Orbitron, sans-serif',
