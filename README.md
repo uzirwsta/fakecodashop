@@ -1,113 +1,111 @@
-LootVault
+# LootVault
 
 LootVault is a web application designed to manage and track in-game items, loot, and inventory for gamers. Built using Django and React, LootVault provides a seamless experience for users to store, organize, and analyze their virtual assets.
 
-Features
+## Features
 
-User Authentication: Secure login and registration system.
+- *User Authentication*: Secure login and registration system.
+- *Loot Management*: Add, edit, and remove in-game items.
+- *Categories & Tags*: Organize loot based on custom categories.
+- *Search & Filter*: Easily find specific items using search and filters.
+- *Real-Time Updates*: Automatically sync inventory changes.
+- *Analytics Dashboard*: Track trends and stats for your items.
+- *Responsive UI*: Optimized for both desktop and mobile devices.
 
-Loot Management: Add, edit, and remove in-game items.
+## Tech Stack
 
-Categories & Tags: Organize loot based on custom categories.
+- *Frontend*: React, Tailwind CSS
+- *Backend*: Django, Django REST Framework
+- *Database*: PostgreSQL / SQLite
+- *Authentication*: Django Authentication, JWT
+- *Hosting*: (Specify if deployed, e.g., Vercel, AWS, Heroku)
 
-Search & Filter: Easily find specific items using search and filters.
+## Installation
 
-Real-Time Updates: Automatically sync inventory changes.
-
-Analytics Dashboard: Track trends and stats for your items.
-
-Responsive UI: Optimized for both desktop and mobile devices.
-
-Tech Stack
-
-Frontend: React, Tailwind CSS
-
-Backend: Django, Django REST Framework
-
-Database: PostgreSQL / SQLite
-
-Authentication: Django Authentication, JWT
-
-Hosting: (Specify if deployed, e.g., Vercel, AWS, Heroku)
-
-Installation
-
-Prerequisites
+### Prerequisites
 
 Ensure you have the following installed:
 
-Python 3.8+
+- Python 3.8+
+- Node.js & npm
+- PostgreSQL (or use SQLite for local development)
 
-Node.js & npm
+### Backend Setup
 
-PostgreSQL (or use SQLite for local development)
+1. Clone the repository:
 
-Backend Setup
+    
+    git clone https://github.com/eayerishz/lootvault.git
+    cd lootvault
+    
 
-Clone the repository:
+2. Create a virtual environment and activate it:
 
-git clone https://github.com/eayerishz/lootvault.git
-cd lootvault
+    
+    python -m venv env
+    source env/bin/activate  # On Windows use `env\Scripts\activate`
+    
 
-Create a virtual environment and activate it:
+3. Install dependencies:
 
-python -m venv env
-source env/bin/activate  # On Windows use `env\Scripts\activate`
+    
+    pip install -r requirements.txt
+    
 
-Install dependencies:
+4. Apply migrations and run the server:
 
-pip install -r requirements.txt
+    
+    python manage.py migrate
+    python manage.py runserver
+    
 
-Apply migrations and run the server:
+### Frontend Setup
 
-python manage.py migrate
-python manage.py runserver
+1. Navigate to the frontend directory:
 
-Frontend Setup
+    
+    cd frontend
+    
 
-Navigate to the frontend directory:
+2. Install dependencies:
 
-cd frontend
+    
+    npm install
+    
 
-Install dependencies:
+3. Start the frontend server:
 
-npm install
+    
+    npm start
+    
 
-Start the frontend server:
+## Usage
 
-npm start
+- Register or log in to access your inventory.
+- Add new loot items and organize them into categories.
+- View, edit, or delete items from your collection.
+- Track trends using the analytics dashboard.
 
-Usage
-
-Register or log in to access your inventory.
-
-Add new loot items and organize them into categories.
-
-View, edit, or delete items from your collection.
-
-Track trends using the analytics dashboard.
-
-Contributing
+## Contributing
 
 We welcome contributions! To contribute:
 
-Fork the repository.
+1. Fork the repository.
+2. Create a feature branch:
 
-Create a feature branch:
+    
+    git checkout -b feature-name
+    
 
-git checkout -b feature-name
+3. Commit your changes and push:
 
-Commit your changes and push:
+    
+    git commit -m "Description of changes"
+    git push origin feature-name
+    
 
-git commit -m "Description of changes"
-git push origin feature-name
+4. Open a Pull Request.
 
-Open a Pull Request.
-
-License (School Purpose Only)
-
-This project is licensed under the Holy Angel University.
-
-Contact
+## Contact
 
 For questions or support, contact [mbmalig@student.hau.edu.ph].
