@@ -18,7 +18,7 @@ LootVault is a web application designed to manage and track in-game items, loot,
 - *Backend*: Django, Django REST Framework
 - *Database*: PostgreSQL / SQLite
 - *Authentication*: Django Authentication, JWT
-- *Hosting*: (Specify if deployed, e.g., Vercel, AWS, Heroku)
+- *Hosting*: (Specify if deployed, e.g., AWS, Heroku)
 
 ## Installation
 
