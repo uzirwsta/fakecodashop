@@ -104,9 +104,9 @@ git push origin feature-name
 
 Open a Pull Request.
 
-License
+License (School Purpose Only)
 
-This project is licensed under the MIT License.
+This project is licensed under the Holy Angel University.
 
 Contact
 
