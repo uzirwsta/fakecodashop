@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  th, td {
+    border: 1px solid white; /* Border for each cell */
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: black; /* Background color for header */
+    position: relative; /* Positioning for the divider */
+  }
+  
+  th:not(:last-child):after {
+    content: "|"; /* Divider between titles */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px; /* Space between title and divider */
+  }
+  
+  tr:hover {
+    background-color: gray; /* Highlight row on hover */
+  }

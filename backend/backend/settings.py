@@ -119,6 +119,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+CORS_ALLOW_CREDENTIALS = True  # Allow cookies to be sent with requests
 
 
 # Static files (CSS, JavaScript, Images)

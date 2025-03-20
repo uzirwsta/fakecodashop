@@ -5,20 +5,25 @@ import Game from '../components/Game';
 
 function HomeScreen() {
   const [games, setGames] = useState([]);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchGames() {
+      console.log('Fetching games from API...');
       try {
-        const { data } = await axios.get('http://localhost:8000/api/games/'); 
+        const { data } = await axios.get('http://localhost:8000/api/games/');
+        console.log('Games fetched successfully:', data);
         setGames(data);
       } catch (error) {
         console.error('Error fetching games:', error);
-        setError('Please try again later.'); 
+        setError('Please try again later.');
       }
     }
     fetchGames();
-  }, []); 
+  }, []);
+
+  console.log('Games state:', games); // Debugging: Check the state of games when rendered
+  console.log('Error state:', error); // Debugging: Check the error state
 
   return (
     <div
@@ -61,66 +66,54 @@ function HomeScreen() {
 
         {/* Row for Games */}
         <Row>
-          {games.map(game => (
-            <Col key={game._id} sm={12} md={6} lg={4} xl={3} style={{ paddingBottom: '20px' }}>
-              <Game game={game} />
-              <div
-                style={{
-                  backgroundColor: '#222',
-                  borderRadius: '15px',
-                  overflow: 'hidden',
-                  boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  position: 'relative',
-                  padding: '10px',
-                }}
-              >
-                {/* Hover Effect */}
+          {games.map(game => {
+            console.log('Rendering game:', game); // Debugging: Check the individual game object
+            return (
+              <Col key={game._id} sm={12} md={6} lg={4} xl={3} style={{ paddingBottom: '20px' }}>
                 <div
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    transition: 'opacity 0.3s ease',
-                    opacity: 0,
+                    backgroundColor: '#222',
                     borderRadius: '15px',
-                  }}
-                />
-                <img
-                  src={game.image}
-                  alt={game.name}
-                  style={{
-                    width: '100%',
-                    height: '250px',
-                    objectFit: 'cover',
-                    borderRadius: '10px',
-                    transition: 'transform 0.3s ease',
-                  }}
-                />
-                {/* Game Name Container */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    left: '0',
-                    right: '0',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    color: '#fff',
-                    padding: ' 10px',
-                    textAlign: 'center',
-                    fontSize: '1.2rem',
-                    fontFamily: 'Orbitron, sans-serif',
-                    textShadow: '0 0 5px rgba(0, 0, 0, 0.7)',
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
+                    position: 'relative',
+                    padding: '10px',
                   }}
                 >
-                  {game.name}
+                  {/* Adjust image URL */}
+                  <img
+                    src={`http://localhost:3000/${game.image_url}`}  // Image URL from your backend
+                    alt={game.name}
+                    style={{
+                      width: '100%',
+                      height: '250px',
+                      objectFit: 'cover',
+                      borderRadius: '10px',
+                      transition: 'transform 0.3s ease',
+                    }}
+                  />
+                  {/* Game Name Container */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '0',
+                      left: '0',
+                      right: '0',
+                      background: 'rgba(0, 0, 0, 0.7)',
+                      color: '#fff',
+                      padding: '10px',
+                      textAlign: 'center',
+                      fontSize: '1.2rem',
+                      fontFamily: 'Orbitron, sans-serif',
+                      textShadow: '0 0 5px rgba(0, 0, 0, 0.7)',
+                    }}
+                  >
+                    {game.name} {/* Display game name */}
+                  </div>
                 </div>
-              </div>
-            </Col>
-          ))}
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </div>
