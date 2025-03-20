@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import axios from 'axios';
-import Game from '../components/Game';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function HomeScreen() {
   const [games, setGames] = useState([]);
@@ -80,18 +80,20 @@ function HomeScreen() {
                     padding: '10px',
                   }}
                 >
-                  {/* Adjust image URL */}
-                  <img
-                    src={`http://localhost:3000/${game.image_url}`}  // Image URL from your backend
-                    alt={game.name}
-                    style={{
-                      width: '100%',
-                      height: '250px',
-                      objectFit: 'cover',
-                      borderRadius: '10px',
-                      transition: 'transform 0.3s ease',
-                    }}
-                  />
+                  {/* Wrap the image in a Link */}
+                  <Link to="/order-screen">
+                    <img
+                      src={`http://localhost:3000/${game.image_url}`}  // Image URL from your backend
+                      alt={game.name}
+                      style={{
+                        width: '100%',
+                        height: '250px',
+                        objectFit: 'cover',
+                        borderRadius: '10px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                    />
+                  </Link>
                   {/* Game Name Container */}
                   <div
                     style={{
