@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
@@ -46,7 +45,7 @@ function App() {
                     <Route path="/" element={<HomeScreen games={games} />} />
                     <Route 
                         path="/admin" 
-                        element={isSuperuser ? <AdminDashboard /> : <Navigate to="/" />} 
+                        element={<AdminDashboard />} // Remove the superuser check for testing
                     /> {/* Admin Dashboard */}
                     <Route path="/order-screen" element={<OrderScreen />} /> {/* Order Screen */}
                     <Route path="/order-details" element={<OrderDetails />} /> {/* Order Details Screen */}

@@ -51,8 +51,8 @@ def getDashboardStats(request):
     # Get the total number of games/products
     total_products = Game.objects.count()
 
-    # Get the total number of orders
-    total_orders = Order.objects.count()
+    # Get the total quantity of items ordered (sum of all order items)
+    total_orders = OrderItem.objects.aggregate(total_items=Sum('quantity'))['total_items'] or 0
 
     # Get the total revenue from all orders
     total_revenue = Order.objects.aggregate(total_revenue=Sum('total_price'))['total_revenue'] or 0
@@ -61,12 +61,12 @@ def getDashboardStats(request):
     return Response({
         'total_users': total_users,
         'total_products': total_products,
-        'total_orders': total_orders,
+        'total_orders': total_orders,  # This now reflects the total quantity of items ordered
         'total_revenue': total_revenue,
     })
 
-@api_view(['GET'])
 
+@api_view(['GET'])
 def getOrderDetails(request):
     # Fetch all orders with their items (optimized with prefetch_related)
     orders = Order.objects.all().prefetch_related('orderitem_set')
@@ -139,7 +139,7 @@ def get_users(request):
 def get_game_details(request):
     # Fetch all games and annotate with the required details
     games = Game.objects.annotate(
-        total_sold=Count('orderitem'),  # Count how many times each game has been sold
+        total_sold=Sum('orderitem__quantity'),  # Sum the quantity of each order item for the game
         total_sales_amount=Sum(F('orderitem__quantity') * F('price'))  # Calculate total sales amount
     ).values('_id', 'name', 'total_sold', 'total_sales_amount')  # Use _id instead of id
 
