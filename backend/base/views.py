@@ -9,21 +9,32 @@ from django.contrib.auth.decorators import login_required  # Import for login_re
 from rest_framework import status
 from django.db.models import Count, Sum, F
 
+from .models import Game  # Ensure the Game model is imported
+
+
 # The endpoint to fetch all games (products)
 @api_view(['GET'])
 def getGames(request):
-    games = Game.objects.all()  # Fetch all games from the database
+    search_query = request.GET.get('search', '')  # Get the search term from the query parameters
+    games = Game.objects.all()  # Default to all games
+
+    if search_query:
+        # If there is a search query, filter games by name (case-insensitive)
+        games = games.filter(name__icontains=search_query)
+
     games_data = [
         {
-            "id": game._id,  # Use _id as the primary key here
+            "id": game._id,
             "name": game.name,
-            "price": str(game.price),  # Convert Decimal to string for easy display
+            "price": str(game.price),
             "category": game.category,
-            "image_url": game.image_url,  # Include image URL if needed
+            "image_url": game.image_url,
         }
         for game in games
     ]
+
     return Response(games_data)
+
 
 # The endpoint to fetch a single game based on its _id
 @api_view(['GET'])
@@ -144,3 +155,19 @@ def get_game_details(request):
     ).values('_id', 'name', 'total_sold', 'total_sales_amount')  # Use _id instead of id
 
     return Response(games)
+
+
+
+def search_games(request):
+    name = request.GET.get('name', '').strip()
+    if name:
+        games = Game.objects.filter(name__icontains=name)  # Use icontains for case-insensitive partial matching
+        results = [{
+            '_id': game._id,
+            'name': game.name,
+            'price': str(game.price),
+            'category': game.category,
+            'image_url': game.image_url
+        } for game in games]
+        return JsonResponse(results, safe=False)
+    return JsonResponse([])  # Return empty list if no search term

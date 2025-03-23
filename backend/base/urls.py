@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views  # Import Django's auth view
 from .views import createOrder  # Import the createOrder view
 from .views import get_users  # Import the get_users view
 from .views import get_game_details  # Import your new view
+from .views import search_games  # Import your new view
 
 urlpatterns = [
     path('api/games/', views.getGames, name="get-games"),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('api/users/', get_users, name='get_users'),  # Add this line
     path('api/game-details/', get_game_details, name='get_game_details'),  # Add this line
     
+    path('api/games/search/', views.search_games, name='search-games'),
+
 ]
